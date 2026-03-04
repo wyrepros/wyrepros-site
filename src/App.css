@@ -614,13 +614,29 @@ h2 {
   font-size: .78rem;
   text-align: center;
 }
+.proof-row {
+  margin-top: .75rem;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: .5rem;
+}
+.proof-row span {
+  font-size: .8rem;
+  color: #374151;
+  text-align: center;
+  border: 1px solid #e5e7eb;
+  border-radius: 999px;
+  padding: .35rem .55rem;
+  background: #fff;
+}
 
 .serviceGrid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: .75rem;
 }
-.card h3 { margin: 0; font-size: .98rem; line-height: 1.35; }
+.card h3 { margin: 0 0 .42rem; font-size: .98rem; line-height: 1.35; }
+.card p { margin: 0; color: #4b5563; font-size: .88rem; line-height: 1.5; }
 .card {
   transition: transform .28s cubic-bezier(.2,.78,.2,1), box-shadow .28s ease, filter .28s ease;
 }
@@ -763,7 +779,7 @@ input:focus-visible, textarea:focus-visible, select:focus-visible,
   }
   .nav nav, .call-btn { display: none; }
   .brand img { height: 40px; }
-  .heroCards, .serviceGrid, .timeline, .showcaseGrid, .trust-grid { grid-template-columns: 1fr; }
+  .heroCards, .serviceGrid, .timeline, .showcaseGrid, .trust-grid, .proof-row { grid-template-columns: 1fr; }
   .form-row.two { grid-template-columns: 1fr; }
   .section { padding: 3.2rem 0; }
   .hero { padding-left: .8rem; padding-right: .8rem; }

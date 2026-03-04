@@ -1,15 +1,15 @@
 import './App.css'
 
 const services = [
-  'Managed IT Support (24/7)',
-  'Network Design + Deployment',
-  'Low-Voltage Cabling + Rack Installs',
-  'Switching, Wi-Fi, and Access Points',
-  'Firewall Setup + Security Hardening',
-  'Endpoint Security + Antivirus Management',
-  'Cameras, Audio, and Access Control',
-  'Workstations + Business Software Rollouts',
-  'Cloud, Backup, and Continuity Planning',
+  { title: 'Managed IT Support (24/7)', outcome: 'Faster incident handling with less downtime disruption.' },
+  { title: 'Network Design + Deployment', outcome: 'Stable connectivity that scales with operations.' },
+  { title: 'Low-Voltage Cabling + Rack Installs', outcome: 'Clean infrastructure that is easy to maintain and expand.' },
+  { title: 'Switching, Wi-Fi, and Access Points', outcome: 'Reliable coverage and throughput across teams and sites.' },
+  { title: 'Firewall Setup + Security Hardening', outcome: 'Reduced exposure with enforced security controls.' },
+  { title: 'Endpoint Security + Antivirus Management', outcome: 'Continuous endpoint defense and threat containment.' },
+  { title: 'Cameras, Audio, and Access Control', outcome: 'Unified visibility and tighter facility control.' },
+  { title: 'Workstations + Business Software Rollouts', outcome: 'Faster onboarding and smoother daily workflows.' },
+  { title: 'Cloud, Backup, and Continuity Planning', outcome: 'Recovery readiness with less operational risk.' },
 ]
 
 export default function App() {
@@ -91,6 +91,11 @@ export default function App() {
             <article><span className="trust-kicker">📈 Standard</span><h3>Uptime-First</h3><p>Standards-driven execution with clear communication</p></article>
           </div>
           <p className="trust-note">Response and resolution timelines vary by issue complexity, environment, and service scope.</p>
+          <div className="proof-row" aria-label="Operational proof points">
+            <span>✅ Structured Implementation Standards</span>
+            <span>✅ Security-First Policy Baselines</span>
+            <span>✅ Transparent Issue Ownership</span>
+          </div>
         </section>
 
         <section id="services" className="section">
@@ -100,7 +105,10 @@ export default function App() {
           </div>
           <div className="serviceGrid">
             {services.map((s) => (
-              <article key={s} className="card"><h3>{s}</h3></article>
+              <article key={s.title} className="card">
+                <h3>{s.title}</h3>
+                <p>{s.outcome}</p>
+              </article>
             ))}
           </div>
         </section>
@@ -157,9 +165,9 @@ export default function App() {
         <section id="contact" className="section cta">
           <div>
             <p className="eyebrow">START NOW</p>
-            <h2>Ready to upgrade your IT operations?</h2>
-            <p>Tell us what you’re building or fixing. We’ll map the fastest path to a secure, stable environment and next-step scope.</p>
-            <p><strong>Priority response available for active outages.</strong></p>
+            <h2>Ready to eliminate IT bottlenecks and risk?</h2>
+            <p>Tell us what you’re building or fixing. We’ll map the fastest path to a secure, stable environment with clear next-step scope and ownership.</p>
+            <p><strong>Priority response available for active outages — no slow handoffs, no guesswork.</strong></p>
           </div>
           <form onSubmit={(e) => e.preventDefault()} noValidate>
             <label>Name<input required autoComplete="name" /></label>
@@ -224,7 +232,7 @@ export default function App() {
             </details>
 
             <label>Project / issue<textarea rows="4" required /></label>
-            <button className="primary" type="submit">Request Priority IT Response</button>
+            <button className="primary" type="submit">Get My Priority IT Action Plan</button>
           </form>
         </section>
       </main>
