@@ -547,10 +547,26 @@ h2 {
     linear-gradient(#fff, #fff) padding-box,
     linear-gradient(135deg, color-mix(in srgb, var(--brand-blue) 24%, transparent), color-mix(in srgb, var(--brand-yellow) 16%, transparent), rgba(0,0,0,.06)) border-box;
   padding: .85rem;
+  transition: transform .24s cubic-bezier(.2,.78,.2,1), box-shadow .24s ease;
+}
+.trust-grid article:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 14px 28px color-mix(in srgb, var(--brand-blue) 18%, transparent);
+}
+.trust-kicker {
+  display: inline-flex;
+  align-items: center;
+  gap: .3rem;
+  font-size: .73rem;
+  font-weight: 700;
+  color: #334155;
+  letter-spacing: .05em;
+  text-transform: uppercase;
+  margin-bottom: .35rem;
 }
 .trust-grid h3 {
   margin: 0 0 .3rem;
-  font-size: 1.05rem;
+  font-size: 1.08rem;
 }
 .trust-grid p {
   margin: 0;
