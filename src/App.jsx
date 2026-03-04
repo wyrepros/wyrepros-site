@@ -188,6 +188,13 @@ export default function App() {
             <p>Tell us what you’re building or fixing. We’ll map the fastest path to a secure, stable environment with clear next-step scope and ownership.</p>
             <p><strong>Priority response available for active outages — no slow handoffs, no guesswork.</strong></p>
           </div>
+
+          <div className="mini-proof" aria-label="Trust assurances before form">
+            <span>⚡ Fast Triage</span>
+            <span>🛡️ Security-First</span>
+            <span>🤝 Clear Ownership</span>
+          </div>
+
           <form onSubmit={(e) => e.preventDefault()} noValidate>
             <label>Name<input required autoComplete="name" /></label>
             <label>Company Name<input required autoComplete="organization" /></label>
@@ -221,44 +228,50 @@ export default function App() {
               </label>
             </div>
 
-            <details className="advanced-fields">
-              <summary>More details (optional)</summary>
-              <div className="form-row two">
-                <label>What business are you?
-                  <select defaultValue="">
-                    <option value="" disabled>Select industry</option>
-                    <option>Healthcare / Medical Office</option>
-                    <option>Legal / Law Firm</option>
-                    <option>Accounting / CPA Firm</option>
-                    <option>Financial Services / Insurance</option>
-                    <option>Real Estate / Property Management</option>
-                    <option>Construction / Trades</option>
-                    <option>Manufacturing</option>
-                    <option>Automotive / Dealership</option>
-                    <option>Retail / E-Commerce</option>
-                    <option>Restaurant / Hospitality</option>
-                    <option>Education / Training</option>
-                    <option>Nonprofit / Church</option>
-                    <option>Government / Public Sector</option>
-                    <option>Logistics / Transportation</option>
-                    <option>Tech / SaaS</option>
-                    <option>Media / Marketing Agency</option>
-                    <option>Other</option>
-                  </select>
-                </label>
-                <label>Current provider (optional)<input autoComplete="organization" /></label>
-              </div>
+            <details className="mobile-step-2">
+              <summary>Step 2: Project details</summary>
+
+              <details className="advanced-fields">
+                <summary>More details (optional)</summary>
+                <div className="form-row two">
+                  <label>What business are you?
+                    <select defaultValue="">
+                      <option value="" disabled>Select industry</option>
+                      <option>Healthcare / Medical Office</option>
+                      <option>Legal / Law Firm</option>
+                      <option>Accounting / CPA Firm</option>
+                      <option>Financial Services / Insurance</option>
+                      <option>Real Estate / Property Management</option>
+                      <option>Construction / Trades</option>
+                      <option>Manufacturing</option>
+                      <option>Automotive / Dealership</option>
+                      <option>Retail / E-Commerce</option>
+                      <option>Restaurant / Hospitality</option>
+                      <option>Education / Training</option>
+                      <option>Nonprofit / Church</option>
+                      <option>Government / Public Sector</option>
+                      <option>Logistics / Transportation</option>
+                      <option>Tech / SaaS</option>
+                      <option>Media / Marketing Agency</option>
+                      <option>Other</option>
+                    </select>
+                  </label>
+                  <label>Current provider (optional)<input autoComplete="organization" /></label>
+                </div>
+              </details>
+
+              <label>Project / issue<textarea rows="4" required /></label>
             </details>
 
-            <label>Project / issue<textarea rows="4" required /></label>
             <button className="primary" type="submit">Get My Priority IT Action Plan</button>
           </form>
         </section>
       </main>
 
-      <a className="mobile-sticky-cta" href="#contact" aria-label="Get IT plan">
-        Get IT Plan
-      </a>
+      <div className="mobile-sticky-cta" aria-label="Mobile quick actions">
+        <a className="cta-call" href="tel:+14804821070" aria-label="Call now">Call Now</a>
+        <a className="cta-plan" href="#contact" aria-label="Get IT plan">Get IT Plan</a>
+      </div>
     </div>
   )
 }
