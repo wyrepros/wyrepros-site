@@ -215,6 +215,9 @@ main::before {
 .call-btn {
   justify-self: end;
 }
+.mobile-call-btn {
+  display: none;
+}
 .mobile-menu-btn {
   display: none;
   justify-self: end;
@@ -849,6 +852,23 @@ input:focus-visible, textarea:focus-visible, select:focus-visible,
   .brand {
     justify-self: center;
     transform: translateX(10%);
+  }
+  .mobile-call-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    left: .35rem;
+    top: 50%;
+    transform: translateY(-50%);
+    border: 1px solid #d4d4d4;
+    border-radius: 10px;
+    background: #fff;
+    width: 40px;
+    height: 40px;
+    text-decoration: none;
+    font-size: 1.1rem;
+    line-height: 1;
   }
   .mobile-menu-btn {
     display: inline-flex;

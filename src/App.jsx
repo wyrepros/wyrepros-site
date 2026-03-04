@@ -36,6 +36,9 @@ export default function App() {
       </div>
 
       <header className="nav">
+        <a className="mobile-call-btn" href="tel:+14804821070" aria-label="Call Wyre Pros">
+          📞
+        </a>
         <a className="brand" href="#top" aria-label="Wyre Pros home">
           <img src={`${base}wyrepros-logo.jpg`} alt="Wyre Pros logo" />
         </a>
