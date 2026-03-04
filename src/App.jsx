@@ -82,6 +82,16 @@ export default function App() {
           </section>
         </section>
 
+        <section className="section trust-strip" aria-label="Trust and service assurances">
+          <div className="trust-grid">
+            <article><h3>&lt; 10 min</h3><p>Priority triage target for urgent support requests</p></article>
+            <article><h3>24/7</h3><p>AI-optimized monitoring and response operations</p></article>
+            <article><h3>USA Wide</h3><p>Remote-first support with national coverage capability</p></article>
+            <article><h3>Uptime-First</h3><p>Standards-driven execution with clear communication</p></article>
+          </div>
+          <p className="trust-note">Response and resolution timelines vary by issue complexity, environment, and service scope.</p>
+        </section>
+
         <section id="services" className="section">
           <div className="sectionHead">
             <p className="eyebrow">CORE SERVICES</p>

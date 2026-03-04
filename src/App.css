@@ -531,6 +531,40 @@ h2 {
   opacity: .9;
 }
 
+.trust-strip {
+  padding-top: 2.2rem;
+  padding-bottom: 2.2rem;
+}
+.trust-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: .72rem;
+}
+.trust-grid article {
+  border: 1px solid transparent;
+  border-radius: 12px;
+  background:
+    linear-gradient(#fff, #fff) padding-box,
+    linear-gradient(135deg, color-mix(in srgb, var(--brand-blue) 24%, transparent), color-mix(in srgb, var(--brand-yellow) 16%, transparent), rgba(0,0,0,.06)) border-box;
+  padding: .85rem;
+}
+.trust-grid h3 {
+  margin: 0 0 .3rem;
+  font-size: 1.05rem;
+}
+.trust-grid p {
+  margin: 0;
+  color: #4b5563;
+  font-size: .88rem;
+  line-height: 1.45;
+}
+.trust-note {
+  margin: .7rem 0 0;
+  color: #6b7280;
+  font-size: .78rem;
+  text-align: center;
+}
+
 .serviceGrid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
@@ -663,7 +697,7 @@ input:focus-visible, textarea:focus-visible, select:focus-visible,
   }
   .nav nav, .call-btn { display: none; }
   .brand img { height: 40px; }
-  .heroCards, .serviceGrid, .timeline, .showcaseGrid { grid-template-columns: 1fr; }
+  .heroCards, .serviceGrid, .timeline, .showcaseGrid, .trust-grid { grid-template-columns: 1fr; }
   .form-row.two { grid-template-columns: 1fr; }
   .section { padding: 3.2rem 0; }
   .hero { padding-left: .8rem; padding-right: .8rem; }
