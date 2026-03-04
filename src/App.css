@@ -684,6 +684,22 @@ form {
   grid-template-columns: 1fr 1fr;
   gap: .64rem;
 }
+.advanced-fields {
+  border: 1px dashed #d4d4d4;
+  border-radius: 10px;
+  padding: .55rem .6rem;
+  background: #fcfcfd;
+}
+.advanced-fields summary {
+  cursor: pointer;
+  font-size: .84rem;
+  font-weight: 700;
+  color: #334155;
+  margin-bottom: .5rem;
+}
+.advanced-fields[open] summary {
+  margin-bottom: .6rem;
+}
 form::before {
   content: "Priority response available for active outages.";
   display: block;

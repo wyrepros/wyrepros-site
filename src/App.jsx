@@ -157,54 +157,64 @@ export default function App() {
           <form onSubmit={(e) => e.preventDefault()} noValidate>
             <label>Name<input required autoComplete="name" /></label>
             <label>Company Name<input required autoComplete="organization" /></label>
-            <label>Phone<input required type="tel" autoComplete="tel" inputMode="tel" /></label>
-            <label>Email<input required type="email" autoComplete="email" inputMode="email" /></label>
 
             <div className="form-row two">
-              <label>What business are you?
-                <select defaultValue="" required>
-                  <option value="" disabled>Select industry</option>
-                  <option>Healthcare / Medical Office</option>
-                  <option>Legal / Law Firm</option>
-                  <option>Accounting / CPA Firm</option>
-                  <option>Financial Services / Insurance</option>
-                  <option>Real Estate / Property Management</option>
-                  <option>Construction / Trades</option>
-                  <option>Manufacturing</option>
-                  <option>Automotive / Dealership</option>
-                  <option>Retail / E-Commerce</option>
-                  <option>Restaurant / Hospitality</option>
-                  <option>Education / Training</option>
-                  <option>Nonprofit / Church</option>
-                  <option>Government / Public Sector</option>
-                  <option>Logistics / Transportation</option>
-                  <option>Tech / SaaS</option>
-                  <option>Media / Marketing Agency</option>
-                  <option>Other</option>
-                </select>
-              </label>
+              <label>Phone<input required type="tel" autoComplete="tel" inputMode="tel" /></label>
+              <label>Email<input required type="email" autoComplete="email" inputMode="email" /></label>
+            </div>
 
+            <div className="form-row two">
               <label>What do you need?
                 <select defaultValue="" required>
                   <option value="" disabled>Select one</option>
+                  <option>Emergency Outage Support</option>
                   <option>Managed IT Support</option>
                   <option>Network / Cabling / Rack Buildout</option>
                   <option>Security + Firewall Hardening</option>
                   <option>Workstation + Software Rollout</option>
-                  <option>Emergency Outage Support</option>
+                </select>
+              </label>
+
+              <label>Timeline
+                <select defaultValue="" required>
+                  <option value="" disabled>Select one</option>
+                  <option>ASAP (Urgent)</option>
+                  <option>Within 7 days</option>
+                  <option>Within 30 days</option>
+                  <option>Planning Phase</option>
                 </select>
               </label>
             </div>
 
-            <label>Timeline
-              <select defaultValue="" required>
-                <option value="" disabled>Select one</option>
-                <option>ASAP (Urgent)</option>
-                <option>Within 7 days</option>
-                <option>Within 30 days</option>
-                <option>Planning Phase</option>
-              </select>
-            </label>
+            <details className="advanced-fields">
+              <summary>More details (optional)</summary>
+              <div className="form-row two">
+                <label>What business are you?
+                  <select defaultValue="">
+                    <option value="" disabled>Select industry</option>
+                    <option>Healthcare / Medical Office</option>
+                    <option>Legal / Law Firm</option>
+                    <option>Accounting / CPA Firm</option>
+                    <option>Financial Services / Insurance</option>
+                    <option>Real Estate / Property Management</option>
+                    <option>Construction / Trades</option>
+                    <option>Manufacturing</option>
+                    <option>Automotive / Dealership</option>
+                    <option>Retail / E-Commerce</option>
+                    <option>Restaurant / Hospitality</option>
+                    <option>Education / Training</option>
+                    <option>Nonprofit / Church</option>
+                    <option>Government / Public Sector</option>
+                    <option>Logistics / Transportation</option>
+                    <option>Tech / SaaS</option>
+                    <option>Media / Marketing Agency</option>
+                    <option>Other</option>
+                  </select>
+                </label>
+                <label>Current provider (optional)<input autoComplete="organization" /></label>
+              </div>
+            </details>
+
             <label>Project / issue<textarea rows="4" required /></label>
             <button className="primary" type="submit">Request Priority IT Response</button>
           </form>
