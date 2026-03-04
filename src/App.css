@@ -483,6 +483,22 @@ form {
   transition: transform .28s cubic-bezier(.2,.78,.2,1), box-shadow .28s ease, filter .28s ease;
   transform-origin: center;
 }
+.timeline article {
+  position: relative;
+  overflow: hidden;
+}
+.timeline article::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(115deg, transparent 35%, rgba(255,255,255,.25) 50%, transparent 65%);
+  transform: translateX(-140%);
+  transition: transform .7s ease;
+  pointer-events: none;
+}
+.timeline article:hover::after {
+  transform: translateX(140%);
+}
 .heroCards article:hover,
 .timeline article:hover,
 .panel aside article:hover,
@@ -797,7 +813,8 @@ input:focus-visible, textarea:focus-visible, select:focus-visible,
     animation: none !important;
   }
   .actions .primary::after,
-  form button.primary::after {
+  form button.primary::after,
+  .timeline article::after {
     display: none !important;
   }
 }
