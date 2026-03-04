@@ -12,6 +12,8 @@ const services = [
 ]
 
 export default function App() {
+  const base = import.meta.env.BASE_URL
+
   return (
     <div className="page" id="top">
       <div className="ambient" aria-hidden="true" />
@@ -32,7 +34,7 @@ export default function App() {
 
       <header className="nav">
         <a className="brand" href="#top" aria-label="Wyre Pros home">
-          <img src="/wyrepros-logo.jpg" alt="Wyre Pros logo" />
+          <img src={`${base}wyrepros-logo.jpg`} alt="Wyre Pros logo" />
         </a>
         <nav aria-label="Primary">
           <a href="#services">Services</a>
