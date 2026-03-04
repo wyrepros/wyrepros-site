@@ -13,21 +13,6 @@ const services = [
 
 export default function App() {
   const base = import.meta.env.BASE_URL
-  const heroVariant = typeof window !== 'undefined' && new URLSearchParams(window.location.search).get('hero') === 'b' ? 'b' : 'a'
-
-  const hero = heroVariant === 'b'
-    ? {
-        title: 'Rapid IT response for mission-critical teams.',
-        proof: 'Built for speed under pressure: fast triage, clear ownership, and decisive execution.',
-        sub: 'Wyre Pros secures and supports your environment with 24/7 AI-optimized operations—so incidents get addressed fast and operations keep moving.',
-        cta: 'Get My Rapid Response Plan',
-      }
-    : {
-        title: 'Reduce downtime. Protect operations.',
-        proof: 'Trusted for uptime-first environments, rapid response, and clean execution standards.',
-        sub: 'Wyre Pros designs, builds, secures, and supports business technology environments—from network foundations and endpoint rollout to 24/7 AI-optimized support operations.',
-        cta: 'Get My IT Game Plan',
-      }
 
   return (
     <div className="page" id="top">
@@ -40,10 +25,6 @@ export default function App() {
       <div className="side-cable side-cable-right" aria-hidden="true">
         <span className="cable-run" />
         <span className="cable-pulse" />
-      </div>
-
-      <div className="ab-badge" aria-label={`Hero variant ${heroVariant.toUpperCase()}`}>
-        Hero {heroVariant.toUpperCase()}
       </div>
 
       <div className="topbar">
@@ -67,11 +48,13 @@ export default function App() {
       <main>
         <section className="hero">
           <p className="eyebrow">IT INFRASTRUCTURE FOR MODERN BUSINESS</p>
-          <h1>{hero.title}</h1>
-          <p className="hero-proof">{hero.proof}</p>
-          <p className="sub">{hero.sub}</p>
+          <h1>One IT partner. Zero operational chaos.</h1>
+          <p className="hero-proof">Trusted for uptime-first environments, rapid response, and clean execution standards.</p>
+          <p className="sub">
+            Wyre Pros designs, builds, secures, and supports business technology environments—from network foundations and endpoint rollout to 24/7 AI-optimized support operations.
+          </p>
           <div className="actions">
-            <a className="primary" href="#contact">{hero.cta}</a>
+            <a className="primary" href="#contact">Get My IT Game Plan</a>
             <a className="ghost" href="#services">Explore Services</a>
           </div>
 
