@@ -655,25 +655,30 @@ input:focus-visible, textarea:focus-visible, select:focus-visible,
 
 @media (max-width: 760px) {
   .topbar { display: none; }
+  .page { width: min(100% - 1rem, 1140px); }
   .nav {
     grid-template-columns: 1fr;
     min-height: 62px;
+    padding: 0 .35rem;
   }
   .nav nav, .call-btn { display: none; }
   .brand img { height: 40px; }
   .heroCards, .serviceGrid, .timeline, .showcaseGrid { grid-template-columns: 1fr; }
   .form-row.two { grid-template-columns: 1fr; }
-  .section { padding: 3.4rem 0; }
+  .section { padding: 3.2rem 0; }
+  .hero { padding-left: .8rem; padding-right: .8rem; }
   .side-cable { display: none; }
-  .ambient { opacity: .85; }
-  .circuit-bg { opacity: .14; }
-  .rackViz { min-height: 120px; }
-  h1 { max-width: 13ch; font-size: clamp(1.8rem, 8vw, 2.5rem); }
-  .sub { font-size: .98rem; line-height: 1.58; }
-  .actions { flex-direction: column; gap: .55rem; }
+  .ambient { opacity: .82; }
+  .circuit-bg { opacity: .12; }
+  .rackViz { min-height: 110px; }
+  h1 { max-width: 13ch; font-size: clamp(1.75rem, 7.8vw, 2.35rem); }
+  .sub { font-size: .97rem; line-height: 1.56; }
+  .actions { flex-direction: column; gap: .5rem; }
   .actions a { width: 100%; }
-  .hero-proof { font-size: .86rem; margin-bottom: .8rem; }
+  .hero-proof { font-size: .84rem; margin-bottom: .75rem; }
   .mobile-sticky-cta { display: inline-flex; }
+  form { gap: .58rem; }
+  input, textarea, select { font-size: 16px; }
 }
 
 .mobile-sticky-cta {
@@ -681,10 +686,10 @@ input:focus-visible, textarea:focus-visible, select:focus-visible,
   position: fixed;
   left: 50%;
   transform: translateX(-50%);
-  bottom: 14px;
+  bottom: max(12px, env(safe-area-inset-bottom));
   z-index: 40;
-  min-width: 180px;
-  padding: .78rem 1rem;
+  min-width: 186px;
+  padding: .82rem 1.05rem;
   border-radius: 999px;
   color: #fff;
   background: linear-gradient(120deg, var(--brand-blue), var(--brand-blue-2));
