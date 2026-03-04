@@ -848,7 +848,7 @@ input:focus-visible, textarea:focus-visible, select:focus-visible,
   .nav nav, .call-btn { display: none; }
   .brand {
     justify-self: center;
-    transform: translateX(14px);
+    transform: translateX(-20%);
   }
   .mobile-menu-btn {
     display: inline-flex;
