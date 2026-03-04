@@ -309,6 +309,19 @@ h1 {
   background: linear-gradient(120deg, var(--brand-blue), var(--brand-blue-2));
   border-color: var(--brand-blue);
   color: #fff;
+  position: relative;
+  overflow: hidden;
+}
+.actions .primary::after, form button.primary::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(120deg, transparent 35%, rgba(255,255,255,.28) 50%, transparent 65%);
+  transform: translateX(-140%);
+  transition: transform .55s ease;
+}
+.actions .primary:hover::after, form button.primary:hover::after {
+  transform: translateX(140%);
 }
 .actions .primary:hover, form button.primary:hover {
   filter: brightness(1.06);
@@ -353,7 +366,9 @@ h1 {
 }
 .hero3d.lite:hover {
   border-color: color-mix(in srgb, var(--brand-yellow) 40%, var(--brand-blue));
-  box-shadow: 0 14px 34px color-mix(in srgb, var(--brand-blue) 18%, transparent);
+  box-shadow:
+    0 14px 34px color-mix(in srgb, var(--brand-blue) 18%, transparent),
+    inset 0 0 20px color-mix(in srgb, var(--brand-yellow) 10%, transparent);
 }
 .cable-line {
   position: absolute;
@@ -529,6 +544,7 @@ h2 {
   margin: .65rem auto 0;
   background: linear-gradient(90deg, var(--brand-yellow), var(--brand-blue-2));
   opacity: .9;
+  box-shadow: 0 0 14px color-mix(in srgb, var(--brand-blue) 28%, transparent);
 }
 
 .trust-strip {
@@ -550,8 +566,10 @@ h2 {
   transition: transform .24s cubic-bezier(.2,.78,.2,1), box-shadow .24s ease;
 }
 .trust-grid article:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 14px 28px color-mix(in srgb, var(--brand-blue) 18%, transparent);
+  transform: translateY(-6px) scale(1.01);
+  box-shadow:
+    0 16px 30px color-mix(in srgb, var(--brand-blue) 20%, transparent),
+    0 0 0 3px color-mix(in srgb, var(--brand-yellow) 12%, transparent);
 }
 .trust-kicker {
   display: inline-flex;
@@ -761,5 +779,9 @@ input:focus-visible, textarea:focus-visible, select:focus-visible,
   .circuit-bg,
   .rackGlow {
     animation: none !important;
+  }
+  .actions .primary::after,
+  form button.primary::after {
+    display: none !important;
   }
 }
