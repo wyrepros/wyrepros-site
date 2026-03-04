@@ -125,18 +125,12 @@ export default function App() {
 
         <section id="process" className="section">
           <div className="sectionHead">
-            <p className="eyebrow">⚙️ EXECUTION MODEL</p>
-            <h2>🔍 Assess → 🧠 Design → 🛠️ Build → 🔐 Secure → 🚀 Support</h2>
+            <p className="eyebrow">EXECUTION MODEL</p>
+            <h2>Assess → Design → Build → Secure → Support</h2>
           </div>
           <div className="timeline">
-            {[
-              { label: 'Assess', icon: '🔍' },
-              { label: 'Design', icon: '🧠' },
-              { label: 'Build', icon: '🛠️' },
-              { label: 'Secure', icon: '🔐' },
-              { label: 'Support', icon: '🚀' },
-            ].map((step, i) => (
-              <article key={step.label}><span>{String(i + 1).padStart(2, '0')}</span><h3>{step.icon} {step.label}</h3></article>
+            {['Assess', 'Design', 'Build', 'Secure', 'Support'].map((step, i) => (
+              <article key={step}><span>{String(i + 1).padStart(2, '0')}</span><h3>{step}</h3></article>
             ))}
           </div>
         </section>
