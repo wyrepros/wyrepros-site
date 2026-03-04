@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import './App.css'
 
 const services = [
@@ -14,6 +15,7 @@ const services = [
 
 export default function App() {
   const base = import.meta.env.BASE_URL
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
 
   return (
     <div className="page" id="top">
@@ -44,7 +46,24 @@ export default function App() {
           <a href="#contact">Contact</a>
         </nav>
         <a className="call-btn" href="tel:+14804821070">Call 480-482-1070</a>
+        <button
+          className="mobile-menu-btn"
+          aria-label="Open navigation menu"
+          aria-expanded={mobileMenuOpen}
+          onClick={() => setMobileMenuOpen((v) => !v)}
+        >
+          ☰
+        </button>
       </header>
+
+      {mobileMenuOpen && (
+        <div className="mobile-menu" role="dialog" aria-label="Mobile navigation">
+          <a href="#services" onClick={() => setMobileMenuOpen(false)}>Services</a>
+          <a href="#platform" onClick={() => setMobileMenuOpen(false)}>Platform</a>
+          <a href="#process" onClick={() => setMobileMenuOpen(false)}>Process</a>
+          <a href="#contact" onClick={() => setMobileMenuOpen(false)}>Contact</a>
+        </div>
+      )}
 
       <main>
         <section className="hero">

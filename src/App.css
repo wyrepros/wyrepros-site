@@ -215,6 +215,20 @@ main::before {
 .call-btn {
   justify-self: end;
 }
+.mobile-menu-btn {
+  display: none;
+  justify-self: end;
+  border: 1px solid #d4d4d4;
+  border-radius: 10px;
+  background: #fff;
+  width: 40px;
+  height: 40px;
+  font-size: 1.1rem;
+  line-height: 1;
+}
+.mobile-menu {
+  display: none;
+}
 .nav nav a {
   text-decoration: none;
   color: #404040;
@@ -773,11 +787,30 @@ input:focus-visible, textarea:focus-visible, select:focus-visible,
   .topbar { display: none; }
   .page { width: min(100% - 1rem, 1140px); }
   .nav {
-    grid-template-columns: 1fr;
+    grid-template-columns: 1fr auto;
     min-height: 62px;
     padding: 0 .35rem;
   }
   .nav nav, .call-btn { display: none; }
+  .mobile-menu-btn { display: inline-flex; align-items: center; justify-content: center; }
+  .mobile-menu {
+    display: grid;
+    gap: .3rem;
+    margin-top: .4rem;
+    padding: .5rem;
+    border: 1px solid #e5e7eb;
+    border-radius: 12px;
+    background: rgba(255,255,255,.96);
+    box-shadow: 0 10px 24px rgba(15, 23, 42, .08);
+  }
+  .mobile-menu a {
+    border: 1px solid #e5e7eb;
+    border-radius: 10px;
+    padding: .55rem .65rem;
+    font-weight: 600;
+    color: #1f2937;
+    background: #fff;
+  }
   .brand img { height: 40px; }
   .heroCards, .serviceGrid, .timeline, .showcaseGrid, .trust-grid, .proof-row { grid-template-columns: 1fr; }
   .form-row.two { grid-template-columns: 1fr; }
