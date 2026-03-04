@@ -42,6 +42,10 @@ export default function App() {
         <span className="cable-pulse" />
       </div>
 
+      <div className="ab-badge" aria-label={`Hero variant ${heroVariant.toUpperCase()}`}>
+        Hero {heroVariant.toUpperCase()}
+      </div>
+
       <div className="topbar">
         <p>24/7 AI-Optimized IT Support · Any Industry · USA Nationwide</p>
         <a href="#contact">Get a Fast IT Plan →</a>
