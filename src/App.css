@@ -840,12 +840,25 @@ input:focus-visible, textarea:focus-visible, select:focus-visible,
   .topbar { display: none; }
   .page { width: min(100% - 1rem, 1140px); }
   .nav {
-    grid-template-columns: 1fr auto;
+    grid-template-columns: 1fr;
     min-height: 62px;
     padding: 0 .35rem;
+    position: relative;
   }
   .nav nav, .call-btn { display: none; }
-  .mobile-menu-btn { display: inline-flex; align-items: center; justify-content: center; }
+  .brand {
+    justify-self: center;
+    transform: translateX(14px);
+  }
+  .mobile-menu-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    right: .35rem;
+    top: 50%;
+    transform: translateY(-50%);
+  }
   .mobile-menu {
     display: grid;
     gap: .3rem;
