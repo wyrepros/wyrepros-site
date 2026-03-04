@@ -6,6 +6,7 @@ const services = [
   'Low-Voltage Cabling + Rack Installs',
   'Switching, Wi-Fi, and Access Points',
   'Firewall Setup + Security Hardening',
+  'Endpoint Security + Antivirus Management',
   'Cameras, Audio, and Access Control',
   'Workstations + Business Software Rollouts',
   'Cloud, Backup, and Continuity Planning',
@@ -85,7 +86,7 @@ export default function App() {
         <section className="section trust-strip" aria-label="Trust and service assurances">
           <div className="trust-grid">
             <article><span className="trust-kicker">⚡ Response</span><h3>&lt; 10 min</h3><p>Priority triage target for urgent support requests</p></article>
-            <article><span className="trust-kicker">🛡️ Coverage</span><h3>24/7</h3><p>AI-optimized monitoring and response operations</p></article>
+            <article><span className="trust-kicker">🛡️ Security</span><h3>24/7</h3><p>Threat monitoring with antivirus and endpoint protection oversight</p></article>
             <article><span className="trust-kicker">🌎 Reach</span><h3>USA Wide</h3><p>Remote-first support with national coverage capability</p></article>
             <article><span className="trust-kicker">📈 Standard</span><h3>Uptime-First</h3><p>Standards-driven execution with clear communication</p></article>
           </div>
@@ -118,7 +119,7 @@ export default function App() {
           </div>
           <aside>
             <article><h4>Design + Deploy</h4><p>Networks, endpoints, and systems delivered with clean implementation standards.</p></article>
-            <article><h4>Secure</h4><p>Firewall policy, segmentation, and security architecture built for resilience.</p></article>
+            <article><h4>Secure</h4><p>Firewall policy, segmentation, antivirus/EDR coverage, and security architecture built for resilience.</p></article>
             <article><h4>Support</h4><p>24/7 AI-optimized operations for faster triage and issue flow.</p></article>
           </aside>
         </section>
@@ -177,6 +178,7 @@ export default function App() {
                   <option>Managed IT Support</option>
                   <option>Network / Cabling / Rack Buildout</option>
                   <option>Security + Firewall Hardening</option>
+                  <option>Antivirus / Endpoint Security Hardening</option>
                   <option>Workstation + Software Rollout</option>
                 </select>
               </label>
