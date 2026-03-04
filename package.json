@@ -6,9 +6,11 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
+    "build:ghpages": "vite build --base=/wyrepros-site/",
     "lint": "eslint .",
     "preview": "vite preview",
-    "maintain": "bash ./scripts/maintenance-sweep.sh"
+    "maintain": "bash ./scripts/maintenance-sweep.sh",
+    "publish-local": "npm run build && rsync -a --delete --exclude '.github' dist/ /Users/clanker/.openclaw/workspace/wyrepros-v1/"
   },
   "dependencies": {
     "react": "^19.2.0",
