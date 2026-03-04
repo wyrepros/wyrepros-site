@@ -200,6 +200,10 @@ export default function App() {
           </form>
         </section>
       </main>
+
+      <a className="mobile-sticky-cta" href="#contact" aria-label="Get IT plan">
+        Get IT Plan
+      </a>
     </div>
   )
 }
