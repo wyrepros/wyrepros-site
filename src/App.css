@@ -843,24 +843,26 @@ input:focus-visible, textarea:focus-visible, select:focus-visible,
   .topbar { display: none; }
   .page { width: min(100% - 1rem, 1140px); }
   .nav {
-    grid-template-columns: 1fr;
+    grid-template-columns: 40px 1fr 40px;
     min-height: 62px;
     padding: 0 .35rem;
     position: relative;
+    align-items: center;
+    column-gap: .35rem;
   }
   .nav nav, .call-btn { display: none; }
   .brand {
+    grid-column: 2;
     justify-self: center;
-    transform: translateX(0%);
+    transform: none;
   }
   .mobile-call-btn {
+    grid-column: 1;
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    position: absolute;
-    left: .35rem;
-    top: 50%;
-    transform: translateY(-50%);
+    position: static;
+    transform: none;
     border: 1px solid #d4d4d4;
     border-radius: 10px;
     background: #fff;
@@ -871,13 +873,12 @@ input:focus-visible, textarea:focus-visible, select:focus-visible,
     line-height: 1;
   }
   .mobile-menu-btn {
+    grid-column: 3;
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    position: absolute;
-    right: .35rem;
-    top: 50%;
-    transform: translateY(-50%);
+    position: static;
+    transform: none;
   }
   .mobile-menu {
     display: grid;
