@@ -166,8 +166,8 @@ export default function App() {
               { label: 'Build', icon: '🛠️' },
               { label: 'Secure', icon: '🔐' },
               { label: 'Support', icon: '🚀' },
-            ].map((step, i) => (
-              <article key={step.label}><span>{String(i + 1).padStart(2, '0')}</span><h3>{step.icon} {step.label}</h3></article>
+            ].map((step) => (
+              <article key={step.label}><h3>{step.icon} {step.label}</h3></article>
             ))}
           </div>
         </section>
