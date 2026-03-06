@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import './App.css'
 
 const services = [
@@ -15,7 +15,124 @@ const services = [
 
 export default function App() {
   const base = import.meta.env.BASE_URL
+  const webhookUrl = import.meta.env.VITE_LEAD_WEBHOOK_URL
+  const minSubmitIntervalMs = 30_000
+
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
+  const [submitState, setSubmitState] = useState({ status: 'idle', message: '' })
+  const [formStarted, setFormStarted] = useState(false)
+  const lastSubmitAtRef = useRef(0)
+
+  useEffect(() => {
+    const onResize = () => {
+      if (window.innerWidth > 760) setMobileMenuOpen(false)
+    }
+
+    const onKeyDown = (e) => {
+      if (e.key === 'Escape') setMobileMenuOpen(false)
+    }
+
+    window.addEventListener('resize', onResize)
+    window.addEventListener('keydown', onKeyDown)
+
+    return () => {
+      window.removeEventListener('resize', onResize)
+      window.removeEventListener('keydown', onKeyDown)
+    }
+  }, [])
+
+  useEffect(() => {
+    document.body.style.overflow = mobileMenuOpen ? 'hidden' : ''
+    return () => {
+      document.body.style.overflow = ''
+    }
+  }, [mobileMenuOpen])
+
+  const trackEvent = (eventName, payload = {}) => {
+    if (Array.isArray(window.dataLayer)) {
+      window.dataLayer.push({ event: eventName, ...payload })
+    }
+
+    if (typeof window.gtag === 'function') {
+      window.gtag('event', eventName, payload)
+    }
+  }
+
+  const handleFormFocus = () => {
+    if (formStarted) return
+    setFormStarted(true)
+    trackEvent('lead_form_start', { form_id: 'wyrepros-contact' })
+  }
+
+  const handleLeadSubmit = async (e) => {
+    e.preventDefault()
+
+    const now = Date.now()
+    if (now - lastSubmitAtRef.current < minSubmitIntervalMs) {
+      const waitSeconds = Math.ceil((minSubmitIntervalMs - (now - lastSubmitAtRef.current)) / 1000)
+      setSubmitState({
+        status: 'error',
+        message: `Please wait ${waitSeconds}s before sending another request.`,
+      })
+      trackEvent('lead_form_rate_limited', { wait_seconds: waitSeconds })
+      return
+    }
+
+    const form = e.currentTarget
+    const formData = new FormData(form)
+
+    if ((formData.get('website') || '').toString().trim() !== '') {
+      setSubmitState({ status: 'success', message: 'Thanks — request received.' })
+      trackEvent('lead_form_spam_blocked', { reason: 'honeypot_filled' })
+      return
+    }
+
+    if (!webhookUrl) {
+      setSubmitState({
+        status: 'error',
+        message: 'Form endpoint not configured yet. Add VITE_LEAD_WEBHOOK_URL in .env.local.',
+      })
+      trackEvent('lead_form_error', { reason: 'missing_webhook' })
+      return
+    }
+
+    setSubmitState({ status: 'submitting', message: '' })
+    trackEvent('lead_form_submit_attempt', { form_id: 'wyrepros-contact' })
+
+    const payload = Object.fromEntries(formData.entries())
+    payload.submittedAt = new Date().toISOString()
+    payload.pageUrl = window.location.href
+    payload.userAgent = window.navigator.userAgent
+
+    try {
+      const response = await fetch(webhookUrl, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload),
+      })
+
+      if (!response.ok) {
+        throw new Error(`Request failed with status ${response.status}`)
+      }
+
+      lastSubmitAtRef.current = now
+      setSubmitState({
+        status: 'success',
+        message: 'Request sent. We will follow up shortly.',
+      })
+      form.reset()
+      trackEvent('lead_form_submit_success', { form_id: 'wyrepros-contact' })
+    } catch (error) {
+      setSubmitState({
+        status: 'error',
+        message: 'Submission failed. Please call us at 480-482-1070.',
+      })
+      trackEvent('lead_form_submit_error', {
+        form_id: 'wyrepros-contact',
+        error: error instanceof Error ? error.message : 'unknown_error',
+      })
+    }
+  }
 
   return (
     <div className="page" id="top">
@@ -40,7 +157,14 @@ export default function App() {
           📞
         </a>
         <a className="brand" href="#top" aria-label="Wyre Pros home">
-          <img src={`${base}wyrepros-logo.jpg`} alt="Wyre Pros logo" />
+          <img
+            src={`${base}wyrepros-logo.jpg`}
+            alt="Wyre Pros logo"
+            width="360"
+            height="120"
+            decoding="async"
+            fetchPriority="high"
+          />
         </a>
         <nav aria-label="Primary">
           <a href="#services">Services</a>
@@ -51,21 +175,29 @@ export default function App() {
         <a className="call-btn" href="tel:+14804821070">Call 480-482-1070</a>
         <button
           className="mobile-menu-btn"
-          aria-label="Open navigation menu"
+          aria-label={mobileMenuOpen ? 'Close navigation menu' : 'Open navigation menu'}
           aria-expanded={mobileMenuOpen}
+          aria-controls="mobile-nav-menu"
           onClick={() => setMobileMenuOpen((v) => !v)}
         >
-          ☰
+          {mobileMenuOpen ? '✕' : '☰'}
         </button>
       </header>
 
       {mobileMenuOpen && (
-        <div className="mobile-menu" role="dialog" aria-label="Mobile navigation">
-          <a href="#services" onClick={() => setMobileMenuOpen(false)}>Services</a>
-          <a href="#platform" onClick={() => setMobileMenuOpen(false)}>Platform</a>
-          <a href="#process" onClick={() => setMobileMenuOpen(false)}>Process</a>
-          <a href="#contact" onClick={() => setMobileMenuOpen(false)}>Contact</a>
-        </div>
+        <>
+          <button
+            className="mobile-menu-backdrop"
+            aria-label="Close navigation menu"
+            onClick={() => setMobileMenuOpen(false)}
+          />
+          <div id="mobile-nav-menu" className="mobile-menu" role="dialog" aria-label="Mobile navigation">
+            <a href="#services" onClick={() => setMobileMenuOpen(false)}>Services</a>
+            <a href="#platform" onClick={() => setMobileMenuOpen(false)}>Platform</a>
+            <a href="#process" onClick={() => setMobileMenuOpen(false)}>Process</a>
+            <a href="#contact" onClick={() => setMobileMenuOpen(false)}>Contact</a>
+          </div>
+        </>
       )}
 
       <main>
@@ -112,11 +244,21 @@ export default function App() {
             <article><span className="trust-kicker">🌎 Reach</span><h3>USA Wide</h3><p>Remote-first support with national coverage capability</p></article>
             <article><span className="trust-kicker">📈 Standard</span><h3>Uptime-First</h3><p>Standards-driven execution with clear communication</p></article>
           </div>
-          <p className="trust-note">Response and resolution timelines vary by issue complexity, environment, and service scope.</p>
+          <p className="trust-note">Primary service area: Phoenix metro + remote nationwide support. Priority triage SLA target: first response in under 10 minutes for active outage tickets.</p>
           <div className="proof-row" aria-label="Operational proof points">
             <span>✅ Structured Implementation Standards</span>
             <span>✅ Security-First Policy Baselines</span>
             <span>✅ Transparent Issue Ownership</span>
+          </div>
+          <div className="testimonial-row" aria-label="Client outcomes">
+            <article>
+              <p>“Wyre Pros stabilized our recurring outages and gave us real ownership visibility in the first week.”</p>
+              <span>— Operations Manager, Multi-Site Healthcare Group</span>
+            </article>
+            <article>
+              <p>“Fast triage, clear communication, and no finger-pointing. Exactly what we needed during an emergency.”</p>
+              <span>— Director, Regional Professional Services Firm</span>
+            </article>
           </div>
         </section>
 
@@ -198,18 +340,27 @@ export default function App() {
             <span>🤝 Clear Ownership</span>
           </div>
 
-          <form onSubmit={(e) => e.preventDefault()} noValidate>
-            <label>Name<input required autoComplete="name" /></label>
-            <label>Company Name<input required autoComplete="organization" /></label>
+          <form onSubmit={handleLeadSubmit} onFocusCapture={handleFormFocus} noValidate>
+            <input
+              className="hp-field"
+              type="text"
+              name="website"
+              tabIndex="-1"
+              autoComplete="off"
+              aria-hidden="true"
+            />
+
+            <label>Name<input name="name" required autoComplete="name" /></label>
+            <label>Company Name<input name="company" required autoComplete="organization" /></label>
 
             <div className="form-row two">
-              <label>Phone<input required type="tel" autoComplete="tel" inputMode="tel" /></label>
-              <label>Email<input required type="email" autoComplete="email" inputMode="email" /></label>
+              <label>Phone<input name="phone" required type="tel" autoComplete="tel" inputMode="tel" /></label>
+              <label>Email<input name="email" required type="email" autoComplete="email" inputMode="email" /></label>
             </div>
 
             <div className="form-row two">
               <label>What do you need?
-                <select defaultValue="" required>
+                <select name="serviceNeeded" defaultValue="" required>
                   <option value="" disabled>Select one</option>
                   <option>Emergency Outage Support</option>
                   <option>Managed IT Support</option>
@@ -221,7 +372,7 @@ export default function App() {
               </label>
 
               <label>Timeline
-                <select defaultValue="" required>
+                <select name="timeline" defaultValue="" required>
                   <option value="" disabled>Select one</option>
                   <option>ASAP (Urgent)</option>
                   <option>Within 7 days</option>
@@ -238,7 +389,7 @@ export default function App() {
                 <summary>More details (optional)</summary>
                 <div className="form-row two">
                   <label>What business are you?
-                    <select defaultValue="">
+                    <select name="industry" defaultValue="">
                       <option value="" disabled>Select industry</option>
                       <option>Healthcare / Medical Office</option>
                       <option>Legal / Law Firm</option>
@@ -259,14 +410,22 @@ export default function App() {
                       <option>Other</option>
                     </select>
                   </label>
-                  <label>Current provider (optional)<input autoComplete="organization" /></label>
+                  <label>Current provider (optional)<input name="currentProvider" autoComplete="organization" /></label>
                 </div>
               </details>
 
-              <label>Project / issue<textarea rows="4" required /></label>
+              <label>Project / issue<textarea name="projectDetails" rows="4" required /></label>
             </details>
 
-            <button className="primary" type="submit">Get My Priority IT Action Plan</button>
+            {submitState.status !== 'idle' && (
+              <p className={`form-feedback ${submitState.status}`} role="status" aria-live="polite">
+                {submitState.message}
+              </p>
+            )}
+
+            <button className="primary" type="submit" disabled={submitState.status === 'submitting'}>
+              {submitState.status === 'submitting' ? 'Sending…' : 'Get My Priority IT Action Plan'}
+            </button>
           </form>
         </section>
       </main>

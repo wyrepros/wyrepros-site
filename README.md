@@ -9,6 +9,16 @@ npm install
 npm run dev
 ```
 
+### Lead form webhook setup
+
+Create `.env.local`:
+
+```bash
+VITE_LEAD_WEBHOOK_URL=https://your-webhook-endpoint.example.com/leads
+```
+
+The contact form posts JSON to this URL. If it is missing, the form will show a configuration warning instead of submitting.
+
 ## Build
 
 ```bash
