@@ -54,6 +54,8 @@ export default function NeuralBackground() {
     const isMobile = window.matchMedia('(max-width: 900px)').matches
     const Q = isMobile ? QUALITY.mobile : QUALITY.desktop
 
+    document.body.classList.add('neural-bg-on')
+
     const renderer = new THREE.WebGLRenderer({
       canvas,
       antialias: true,
@@ -363,6 +365,7 @@ export default function NeuralBackground() {
       halo2.geometry.dispose()
       halo2.material.dispose()
       renderer.dispose()
+      document.body.classList.remove('neural-bg-on')
     }
   }, [])
 
