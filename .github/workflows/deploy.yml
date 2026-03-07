@@ -31,6 +31,8 @@ jobs:
         run: npm ci
 
       - name: Build
+        env:
+          VITE_ENABLE_NEURAL_BG: "1"
         run: npm run build:ghpages
 
       - name: Setup Pages
