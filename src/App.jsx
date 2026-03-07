@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
+import NeuralBackground from './NeuralBackground'
 import './App.css'
 
 const services = [
@@ -17,6 +18,7 @@ export default function App() {
   const base = import.meta.env.BASE_URL
   const webhookUrl = import.meta.env.VITE_LEAD_WEBHOOK_URL
   const minSubmitIntervalMs = 30_000
+  const enableNeuralBackground = import.meta.env.VITE_ENABLE_NEURAL_BG === '1'
 
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   const [submitState, setSubmitState] = useState({ status: 'idle', message: '' })
@@ -136,8 +138,9 @@ export default function App() {
 
   return (
     <div className="page" id="top">
-      <div className="ambient" aria-hidden="true" />
-      <div className="circuit-bg" aria-hidden="true" />
+      {enableNeuralBackground ? <NeuralBackground /> : null}
+      {!enableNeuralBackground && <div className="ambient" aria-hidden="true" />}
+      {!enableNeuralBackground && <div className="circuit-bg" aria-hidden="true" />}
       <div className="side-cable side-cable-left" aria-hidden="true">
         <span className="cable-run" />
         <span className="cable-pulse" />

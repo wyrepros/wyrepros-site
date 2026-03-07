@@ -10,6 +10,16 @@
 }
 body { margin: 0; background: #fff; }
 
+.neural-bg-canvas {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -3;
+  pointer-events: none;
+  display: block;
+}
+
 .page {
   width: min(100% - 2rem, 1140px);
   margin: 0 auto;
